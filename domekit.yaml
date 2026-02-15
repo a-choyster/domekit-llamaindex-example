@@ -1,0 +1,21 @@
+app:
+  name: llamaindex-example
+
+policy:
+  network:
+    outbound: deny
+  tools:
+    allow: [sql_query, read_file]
+  data:
+    sqlite:
+      allow: ["data/papers.db"]
+    filesystem:
+      allow_read: ["data/"]
+      allow_write: []
+
+models:
+  backend: ollama
+  default: llama3.1:8b
+
+audit:
+  path: "audit.jsonl"
