@@ -12,7 +12,7 @@ import sqlite3
 from llama_index.core import Settings
 from llama_index.core.agent import ReActAgent
 from llama_index.core.tools import FunctionTool
-from llama_index.llms.openai import OpenAI
+from llama_index.llms.openai_like import OpenAILike
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "data", "papers.db")
 
@@ -21,10 +21,16 @@ DB_PATH = os.path.join(os.path.dirname(__file__), "data", "papers.db")
 # LLM -- pointed at DomeKit instead of OpenAI
 # ---------------------------------------------------------------------------
 
-llm = OpenAI(
+# OpenAILike is designed for non-OpenAI endpoints that speak the OpenAI protocol.
+# It doesn't validate model names against OpenAI's list, so it works with Ollama
+# model names like "llama3.1:8b".
+llm = OpenAILike(
     model="llama3.1:8b",
     api_base="http://localhost:8080/v1",
     api_key="not-needed",
+    context_window=8192,
+    is_chat_model=True,
+    is_function_calling_model=True,
 )
 
 Settings.llm = llm

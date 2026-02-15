@@ -13,7 +13,7 @@ def test_llamaindex_imports():
     from llama_index.core import Settings
     from llama_index.core.agent import ReActAgent
     from llama_index.core.tools import FunctionTool
-    from llama_index.llms.openai import OpenAI
+    from llama_index.llms.openai_like import OpenAILike
 
 
 def test_agent_module_imports():
