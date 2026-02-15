@@ -23,7 +23,7 @@ DB_PATH = os.path.join(os.path.dirname(__file__), "data", "papers.db")
 
 llm = OpenAI(
     model="llama3.1:8b",
-    base_url="http://localhost:8080/v1",
+    api_base="http://localhost:8080/v1",
     api_key="not-needed",
 )
 
@@ -96,7 +96,7 @@ read_tool = FunctionTool.from_defaults(fn=read_file)
 # Agent
 # ---------------------------------------------------------------------------
 
-agent = ReActAgent.from_tools(
+agent = ReActAgent(
     tools=[sql_tool, read_tool],
     llm=llm,
     verbose=True,
